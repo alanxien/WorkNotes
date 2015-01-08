@@ -32,10 +32,11 @@ public class BaseActivity extends Activity {
 		}
 	}
 	
+	
 	/**
 	 * @author alan.xie
-	 * @date 2015-1-7 ����4:04:42
-	 * @Description: ����
+	 * @date 2015-1-8 上午11:21:35
+	 * @Description: 返回
 	 * @param @param v
 	 * @return void
 	 */
