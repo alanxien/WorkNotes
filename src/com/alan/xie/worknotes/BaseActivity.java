@@ -8,9 +8,10 @@ import android.view.View;
 
 import com.alan.xie.worknotes.common.Constant;
 
+
 /**
  * @author alan.xie
- * @date 2015-1-7 ����4:05:04
+ * @date 2015-1-8 上午11:15:46
  * @Description: TODO
  */
 public class BaseActivity extends Activity {
