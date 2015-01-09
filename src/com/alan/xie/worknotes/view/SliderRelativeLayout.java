@@ -32,8 +32,10 @@ public class SliderRelativeLayout extends RelativeLayout{
 	private ImageView rightRingView = null;
 	private Handler handler = null; 			//信息传递
 	private int locationX = 0; 					//bitmap初始绘图位置，足够大，可以认为看不见
-	private static int BACK_DURATION = 10 ;   	//回滚动画时间间隔20ms
+	private static int BACK_DURATION = 10 ;   	//回滚动画时间间隔40ms
 	private static float VE_HORIZONTAL = 0.9f ; //水平方向前进速率 0.1dip/ms
+	
+	private boolean flag = false; //记录是否已经按下；
 	
 	public SliderRelativeLayout(Context context) {
 		super(context); 
@@ -79,7 +81,7 @@ public class SliderRelativeLayout extends RelativeLayout{
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN: 
-			//dragBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_slide_circle_n);
+			dragBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_slide_circle_n);
 			locationX = (int) event.getX();
 			Log.i(TAG, "是否点击到位=" + isActionDown(event));
 			return isActionDown(event);//判断是否点击了滑动区域
@@ -90,9 +92,10 @@ public class SliderRelativeLayout extends RelativeLayout{
 			return true;
 			
 		case MotionEvent.ACTION_UP: //判断是否解锁成功
-			//dragBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_action_circle_frame);
+			dragBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.icon_action_circle_frame);
 			if(!unLockLeft() && !unLockRight()){ //没有解锁成功,动画应该回滚
-				handleActionUpEvent(event); //动画回滚
+				flag = false;
+				handleActionUpEvent(event);      //动画回滚
 			}
 			return true;
 		}
@@ -115,8 +118,8 @@ public class SliderRelativeLayout extends RelativeLayout{
 			locationX = x - getScreenWidth()/2;
 		}
 		
-		if(locationX > 0){
-			handler.postDelayed(ImageBack, BACK_DURATION); //回�?
+		if(locationX >= 0){
+			handler.postDelayed(ImageBack, BACK_DURATION); //回滚
 		}
 	}
 
@@ -144,7 +147,8 @@ public class SliderRelativeLayout extends RelativeLayout{
 		heartView.getHitRect(rect);
 		boolean isIn = rect.contains((int)event.getX(), (int)event.getY());
 		if(isIn){
-			heartView.setVisibility(View.GONE);
+			//heartView.setVisibility(View.GONE);
+			flag = true;
 			return true;
 		}
 		return false;
@@ -171,18 +175,18 @@ public class SliderRelativeLayout extends RelativeLayout{
 		int drawX = locationX - heartView.getWidth()/2;
 		int drawY = heartView.getTop();
 		
-		if(drawX < -30){ 
+		if(!flag){ 
 			heartView.setVisibility(View.VISIBLE);
 			return;
 		}else {
-			if(locationX < leftRingView.getWidth()){ //向左解锁
+			if(locationX < leftRingView.getWidth()-10){ //滑动到最左边，heartView消失
 				return;
 			}
-			if(locationX > (getScreenWidth() - rightRingView.getWidth()) || locationX < leftRingView.getWidth()){ //向右解锁
+			if(locationX > (getScreenWidth() - rightRingView.getWidth()-20)){ //滑到最右边 heartView 消失
 				return;
 			}
 			heartView.setVisibility(View.GONE);
-			if(drawX > leftRingView.getWidth()-10){
+			if(drawX > leftRingView.getWidth()/2){
 				canvas.drawBitmap(dragBitmap,drawX,drawY,null);
 			}
 			
@@ -197,6 +201,7 @@ public class SliderRelativeLayout extends RelativeLayout{
 	 */
 	private boolean unLockLeft(){
 		if(locationX < leftRingView.getWidth()){
+			heartView.setVisibility(View.GONE);
 			//leftRingView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_lock_screen_share_s));
 			handler.obtainMessage(LockScreenActivity.MSG_LOCK_SUCCESS_L).sendToTarget();
 			Log.i(TAG, "-------------------left----------");
@@ -211,7 +216,8 @@ public class SliderRelativeLayout extends RelativeLayout{
 	 * @return
 	 */
 	private boolean unLockRight(){
-		if(locationX > (getScreenWidth() - rightRingView.getWidth())){
+		if(locationX > (getScreenWidth() - rightRingView.getWidth()-20)){
+			heartView.setVisibility(View.GONE);
 			//rightRingView.setImageDrawable(context.getResources().getDrawable(R.drawable.icon_action_unlock_s));
 			handler.obtainMessage(LockScreenActivity.MSG_LOCK_SUCCESS_R).sendToTarget();
 			Log.i(TAG, "-------------------right----------");
@@ -245,3 +251,4 @@ public class SliderRelativeLayout extends RelativeLayout{
 	}
 
 }
+

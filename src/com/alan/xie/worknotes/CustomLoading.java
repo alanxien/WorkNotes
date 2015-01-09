@@ -16,6 +16,5 @@ public class CustomLoading extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_custom_loading);
 		
-		//
 	}
 }

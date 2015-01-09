@@ -17,7 +17,7 @@ import com.alan.xie.worknotes.common.Constant;
 public class BaseActivity extends Activity {
 	
 	public SharedPreferences pref;
-	public Editor editor;
+	public Editor editor; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -50,12 +50,12 @@
     
     <com.alan.xie.worknotes.view.SliderRelativeLayout 
         android:id="@+id/sliderLayout"
-        android:layout_height="60dp"
+        android:layout_height="66dp"
         android:layout_width="fill_parent"
         android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:background="@drawable/lockbg"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"> 
         
         <RelativeLayout 
 	        android:id="@+id/relativeLayout1"
@@ -86,21 +86,18 @@
 	    </RelativeLayout>
 
 	     <RelativeLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:gravity="center"
-	        >
+	         android:layout_width="match_parent"
+	         android:layout_height="56dp"
+	         android:layout_centerVertical="true"
+	         android:gravity="center" >
 
-	        <ImageView
-	            android:id="@+id/loveView"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentBottom="true"
-	            android:layout_centerHorizontal="true"
-	            android:scaleType="fitXY"
-	            android:src="@drawable/icon_action_circle_frame" />
-
-	    </RelativeLayout>
+	         <ImageView
+	             android:id="@+id/loveView"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:scaleType="fitXY"
+	             android:src="@drawable/icon_action_circle_frame" />
+	     </RelativeLayout>
 
     </com.alan.xie.worknotes.view.SliderRelativeLayout>
 
