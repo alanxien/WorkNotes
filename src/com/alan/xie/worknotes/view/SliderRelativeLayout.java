@@ -24,15 +24,16 @@ import com.alan.xie.worknotes.LockScreenActivity;
  */
 public class SliderRelativeLayout extends RelativeLayout{
 	private final static String TAG = "SliderRelativeLayout";
+	
 	private Context context;
-	private Bitmap dragBitmap = null; //拖拽图片
-	private int locationX = 0; //bitmap初始绘图位置，足够大，可以认为看不见
-	private ImageView heartView = null; //主要是获取相对布局高度
+	private Bitmap dragBitmap = null; 			//拖拽图片
+	private ImageView heartView = null; 		//主要是获取相对布局高度
 	private ImageView leftRingView = null;
 	private ImageView rightRingView = null;
-	private Handler handler = null; //信息传递
-	private static int BACK_DURATION = 10 ;   // 回滚动画时间间隔20ms
-	private static float VE_HORIZONTAL = 0.9f ;  // 水平方向前进速率 0.1dip/ms
+	private Handler handler = null; 			//信息传递
+	private int locationX = 0; 					//bitmap初始绘图位置，足够大，可以认为看不见
+	private static int BACK_DURATION = 10 ;   	//回滚动画时间间隔20ms
+	private static float VE_HORIZONTAL = 0.9f ; //水平方向前进速率 0.1dip/ms
 	
 	public SliderRelativeLayout(Context context) {
 		super(context); 
