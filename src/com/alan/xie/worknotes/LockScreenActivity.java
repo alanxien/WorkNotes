@@ -3,6 +3,7 @@ package com.alan.xie.worknotes;
 import java.util.Calendar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,9 +14,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alan.xie.worknotes.R;
 import com.alan.xie.worknotes.common.Constant;
+import com.alan.xie.worknotes.service.LockScreenService;
 import com.alan.xie.worknotes.view.SliderRelativeLayout;
 
 /**
@@ -35,6 +38,7 @@ public class LockScreenActivity extends BaseActivity{
 	private TextView tv_date;
 	private TextView tv_weeks;
 	private RelativeLayout rl_main;
+	private Intent intent;
 	
 	private Calendar calendar = null;
 	
@@ -75,6 +79,33 @@ public class LockScreenActivity extends BaseActivity{
 	protected void onResume() {
 		Log.i(TAG, "success---onResume");
 		super.onResume();
+	}
+	
+	@Override
+	protected void onPause() {
+		if(pref.getBoolean(Constant.IS_KEY_HOME, false)){
+			editor.putBoolean(Constant.IS_KEY_HOME, false);
+			editor.commit();
+			this.finish();
+		}
+		super.onPause();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		editor.putInt(Constant.SLIDER, 0);
+		editor.commit();
+		Log.i(TAG, "onDestroy----"+pref.getInt(Constant.SLIDER, 0));
+		super.onDestroy();
+	}
+	
+	@Override
+	protected void onUserLeaveHint() {
+		if(!pref.getBoolean(Constant.IS_KEY_HOME, false)){
+			editor.putBoolean(Constant.IS_KEY_HOME, true);
+			editor.commit();
+		}
+		super.onUserLeaveHint();
 	}
 	
 	private void initData(){
@@ -159,6 +190,8 @@ public class LockScreenActivity extends BaseActivity{
 		Vibrator vibrator = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
 		vibrator.vibrate(200);
 	}
+	
+	
 	/**
 	 * 屏蔽掉返回键
 	 */
@@ -166,8 +199,6 @@ public class LockScreenActivity extends BaseActivity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if(event.getKeyCode() == KeyEvent.KEYCODE_BACK){
 			return true;
-		}else if (keyCode == KeyEvent.KEYCODE_HOME) {
-            return true;
 		}else {
 			return super.onKeyDown(keyCode, event);
 		}

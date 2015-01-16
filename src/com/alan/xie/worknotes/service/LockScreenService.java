@@ -11,6 +11,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alan.xie.worknotes.LockScreenActivity;
 import com.alan.xie.worknotes.common.Constant;
@@ -43,6 +44,10 @@ public class LockScreenService extends Service {
 		
 		pref = getApplicationContext().getSharedPreferences(Constant.SHARED, FragmentActivity.MODE_PRIVATE);
 		editor = pref.edit();
+		
+		keyguardManager = (KeyguardManager) this.getSystemService(Context.KEYGUARD_SERVICE);
+		keyguardLock = keyguardManager.newKeyguardLock("");
+		keyguardLock.disableKeyguard(); //这里就是取消系统默认的锁
 	}
 	
 
@@ -52,7 +57,7 @@ public class LockScreenService extends Service {
 		super.onDestroy();
 		Log.i(TAG, "---------------onDestroy-----------------");
 		LockScreenService.this.unregisterReceiver(mScreenOffReceiver);
-		
+		keyguardLock.reenableKeyguard();
 		if (pref.getBoolean(Constant.IS_LOCK_SCREEN, false)){
 			//重新启动activity
 			Log.i(TAG, "---------------onDestroy重启-----------------");
@@ -78,9 +83,6 @@ public class LockScreenService extends Service {
 			if(intent.getAction().equals(Intent.ACTION_SCREEN_OFF)
 					|| intent.getAction().equals(Intent.ACTION_SCREEN_ON)){
 				
-				keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-				keyguardLock = keyguardManager.newKeyguardLock("");
-				keyguardLock.disableKeyguard(); //这里就是取消系统默认的锁
 				Log.i(TAG, lockIntent+"----"+pref.getInt(Constant.SLIDER, 0));
 				if(pref.getInt(Constant.SLIDER, 0) == 0){
 					startActivity(lockIntent);
@@ -90,7 +92,7 @@ public class LockScreenService extends Service {
 			}
 		}
 	};
-	
+
 }
 
 
