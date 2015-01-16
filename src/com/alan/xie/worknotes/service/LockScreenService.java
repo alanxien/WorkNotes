@@ -11,15 +11,20 @@ import android.content.SharedPreferences.Editor;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alan.xie.worknotes.LockScreenActivity;
 import com.alan.xie.worknotes.common.Constant;
 
+/**
+ * @author alan.xie
+ * @date 2015-1-16 下午5:51:08
+ * @Description: 锁屏服务
+ */
 public class LockScreenService extends Service {
 	private final static String TAG = "LockScreenService";
 	private Intent lockIntent;
 	private KeyguardManager keyguardManager = null;
+	@SuppressWarnings("deprecation")
 	private KeyguardManager.KeyguardLock keyguardLock = null;
 	
 	private SharedPreferences pref;
@@ -57,6 +62,9 @@ public class LockScreenService extends Service {
 		super.onDestroy();
 		Log.i(TAG, "---------------onDestroy-----------------");
 		LockScreenService.this.unregisterReceiver(mScreenOffReceiver);
+		/*
+		 * 必须和disablekeyguard()一起使用，否则无效
+		 */
 		keyguardLock.reenableKeyguard();
 		if (pref.getBoolean(Constant.IS_LOCK_SCREEN, false)){
 			//重新启动activity
@@ -73,7 +81,7 @@ public class LockScreenService extends Service {
 	}
 	
 	/**
-	 * 屏幕变亮的广播，这里要隐藏系统的锁屏界面
+	 * 屏幕变亮的广播
 	 */
 	private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver() {
 		@SuppressWarnings("deprecation")

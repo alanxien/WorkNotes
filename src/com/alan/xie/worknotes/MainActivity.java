@@ -22,12 +22,12 @@ import com.alan.xie.worknotes.service.LockScreenService;
  */
 public class MainActivity extends BaseActivity implements OnClickListener{
 	
-	private TextView tv_lock_screen;	//锁屏
-	private TextView tv_custom_loading; //自定义加载框
+	private TextView tv_lock_screen;		//锁屏
+	private TextView tv_custom_loading; 	//自定义加载框
 	
 	private Intent intent;
 	
-	private static Boolean isExit = false; //双击退出
+	private static Boolean isExit = false; 	//双击退出
 	private Timer exit = null;
 
 	@Override
