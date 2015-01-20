@@ -34,7 +34,7 @@
         
         <!-- 锁屏 -->
         <activity 
-            android:name="com.alan.xie.worknotes.LockScreenActivity"
+            android:name="com.alan.xie.worknotes.activity.lockscreen.LockScreenActivity"
             android:launchMode="singleTask" 
             android:screenOrientation="portrait">
             <!-- <intent-filter>
@@ -51,7 +51,7 @@
         </service>
         
         <activity 
-            android:name="com.alan.xie.worknotes.CustomLoading">
+            android:name="com.alan.xie.worknotes.activity.customloading.CustomLoadingActivity">
         </activity>
     </application>
 

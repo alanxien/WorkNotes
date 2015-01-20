@@ -48,7 +48,7 @@
         </LinearLayout>
     </LinearLayout>
     
-    <com.alan.xie.worknotes.view.SliderRelativeLayout 
+    <com.alan.xie.worknotes.view.lockscreen.SliderRelativeLayout 
         android:id="@+id/sliderLayout"
         android:layout_height="66dp"
         android:layout_width="fill_parent"
@@ -99,6 +99,6 @@
 	             android:src="@drawable/icon_action_circle_frame" />
 	     </RelativeLayout>
 
-    </com.alan.xie.worknotes.view.SliderRelativeLayout>
+    </com.alan.xie.worknotes.view.lockscreen.SliderRelativeLayout>
 
 </RelativeLayout>

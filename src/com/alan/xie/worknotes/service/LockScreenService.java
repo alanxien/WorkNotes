@@ -12,7 +12,7 @@ import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.alan.xie.worknotes.LockScreenActivity;
+import com.alan.xie.worknotes.activity.lockscreen.LockScreenActivity;
 import com.alan.xie.worknotes.common.Constant;
 
 /**

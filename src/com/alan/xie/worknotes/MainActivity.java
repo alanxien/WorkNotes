@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alan.xie.worknotes.activity.customloading.CustomLoadingActivity;
 import com.alan.xie.worknotes.common.Constant;
 import com.alan.xie.worknotes.service.LockScreenService;
 
@@ -100,7 +101,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 			editor.commit();
 			break;
 		case R.id.tv_custom_loading:
-			intent.setClass(this, CustomLoading.class);
+			intent.setClass(this, CustomLoadingActivity.class);
 			startActivity(intent);
 			break;
 		default:
