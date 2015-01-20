@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alan.xie.worknotes.activity.customloading.CustomLoadingActivity;
+import com.alan.xie.worknotes.activity.pie.PieActivity;
 import com.alan.xie.worknotes.common.Constant;
 import com.alan.xie.worknotes.service.LockScreenService;
 
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	
 	private TextView tv_lock_screen;		//锁屏
 	private TextView tv_custom_loading; 	//自定义加载框
+	private TextView tv_pie;				//馅饼图
 	
 	private Intent intent;
 	
@@ -50,9 +52,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 	private void initView(){
 		tv_lock_screen = (TextView) findViewById(R.id.tv_lock_screen);
 		tv_custom_loading = (TextView) findViewById(R.id.tv_custom_loading);
+		tv_pie = (TextView) findViewById(R.id.tv_pie);
 		
 		tv_lock_screen.setOnClickListener(this);
 		tv_custom_loading.setOnClickListener(this);
+		tv_pie.setOnClickListener(this);
 		
 		intent = new Intent();
 		if(exit == null){
@@ -103,6 +107,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 		case R.id.tv_custom_loading:
 			intent.setClass(this, CustomLoadingActivity.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+			break;
+		case R.id.tv_pie:
+			intent.setClass(this, PieActivity.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 			break;
 		default:
 			break;

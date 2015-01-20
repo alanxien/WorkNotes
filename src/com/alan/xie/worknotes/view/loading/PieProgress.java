@@ -127,8 +127,8 @@ public class PieProgress extends View {
 	 */
 	public synchronized void setProgress(int progress) {
 		mProgress = progress;
-		if (progress > 150) {
-			mProgress = 150;
+		if (progress > 360) {
+			mProgress = 360;
 		}
 		updateBitmap();
 	}

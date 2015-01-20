@@ -39,7 +39,23 @@
         android:id="@+id/tv_custom_loading" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="自定义加载框" 
+        android:text="Loading &amp; Progress" 
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="@drawable/text_color_selector"
+        android:background="@drawable/blue_selector"
+        android:layout_marginTop="5dp"
+        android:clickable="true"/>
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray_line"/>
+    
+    <TextView
+        android:id="@+id/tv_pie" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Canvas" 
         android:textSize="20sp"
         android:padding="10dp"
         android:textColor="@drawable/text_color_selector"

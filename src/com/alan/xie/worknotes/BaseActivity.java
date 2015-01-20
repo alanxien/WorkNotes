@@ -42,5 +42,6 @@ public class BaseActivity extends Activity {
 	 */
 	public void back(View v){
 		this.finish();
+		overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
 	}
 }
