@@ -36,28 +36,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
         
-        <Button
-            android:id="@+id/btn_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:padding="10dp"
-            android:text="start"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:background="@drawable/button_selector" 
-            android:visibility="gone"/>
-        
-        <com.alan.xie.worknotes.view.loading.PieProgress
+        <com.alan.xie.worknotes.view.pie.PieProgress
             xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
             android:id="@+id/pie_progress"
             android:layout_width="120dp"
             android:layout_height="120dp"
             PieProgress:foregroundColor="@color/hotpink"
             PieProgress:backgroundColor="@color/lightseagreen" />
-
+        
+	<com.alan.xie.worknotes.view.pie.PieChart
+	    android:id="@+id/pie_chart"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>
 

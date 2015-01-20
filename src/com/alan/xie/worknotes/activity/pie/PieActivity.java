@@ -6,12 +6,14 @@ import android.view.View.OnClickListener;
 
 import com.alan.xie.worknotes.BaseActivity;
 import com.alan.xie.worknotes.R;
-import com.alan.xie.worknotes.view.loading.PieProgress;
+import com.alan.xie.worknotes.entity.PieItemBean;
+import com.alan.xie.worknotes.view.pie.PieChart;
+import com.alan.xie.worknotes.view.pie.PieProgress;
 
 /**
  * @author alan.xie
  * @date 2015-1-8 上午11:21:57
- * @Description: 馅饼图
+ * @Description: 饼图
  */
 public class PieActivity extends BaseActivity implements OnClickListener{
 	
@@ -21,6 +23,8 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 	private PieProgress pie_progress;
 	boolean pieRunning;
 	int pieProgress = 0; //每次画多少度（0-360）
+	
+	PieChart pieChart;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +32,30 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 		setContentView(R.layout.activity_pie);
 		
 		pie_progress = (PieProgress) findViewById(R.id.pie_progress);
+		pieChart = (PieChart) findViewById(R.id.pie_chart);
 		
 		pie_progress.setOnClickListener(this);
+		
+		initPieChart();
+	}
+	
+	/**
+	 * @author alan.xie
+	 * @date 2015-1-20 下午5:56:47
+	 * @Description: 初始化饼图
+	 * @param 
+	 * @return void
+	 */
+	private void initPieChart(){
+        PieItemBean[] items = new PieItemBean[]{
+                new PieItemBean("娱乐", 200),
+                new PieItemBean("旅行", 100),
+                new PieItemBean("学习", 120),
+                new PieItemBean("人际关系", 160),
+                new PieItemBean("交通", 100),
+                new PieItemBean("餐饮", 480)
+        };
+        pieChart.setPieItems(items);
 	}
 
 	@Override

@@ -53,7 +53,7 @@
         <activity 
             android:name=".activity.customloading.CustomLoadingActivity">
         </activity>
-        <!-- 馅饼图 -->
+        <!-- 饼图 -->
         <activity android:name=".activity.pie.PieActivity">
         </activity>
     </application>
