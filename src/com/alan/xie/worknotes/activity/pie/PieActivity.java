@@ -9,6 +9,7 @@ import com.alan.xie.worknotes.R;
 import com.alan.xie.worknotes.entity.PieItemBean;
 import com.alan.xie.worknotes.view.pie.PieChart;
 import com.alan.xie.worknotes.view.pie.PieProgress;
+import com.alan.xie.worknotes.view.pie.ProgressWheel;
 
 /**
  * @author alan.xie
@@ -21,8 +22,12 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 	 * 饼图
 	 */
 	private PieProgress pie_progress;
-	boolean pieRunning;
-	int pieProgress = 0; //每次画多少度（0-360）
+	private boolean pieRunning;
+	private int pieProgress = 0; //每次画多少度（0-360）
+	
+	private ProgressWheel wheel_progress;
+	private boolean wheelRunning;
+	private int wheelProgress = 0; // 圆形进度条长度
 	
 	PieChart pieChart;
 
@@ -33,8 +38,10 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 		
 		pie_progress = (PieProgress) findViewById(R.id.pie_progress);
 		pieChart = (PieChart) findViewById(R.id.pie_chart);
+		wheel_progress = (ProgressWheel) findViewById(R.id.wheel_progress);
 		
 		pie_progress.setOnClickListener(this);
+		wheel_progress.setOnClickListener(this);
 		
 		initPieChart();
 	}
@@ -67,7 +74,13 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 				new Thread(indicatorRunnable).start();
 			}
 			break;
-
+		case R.id.wheel_progress:
+			if (!wheelRunning) {
+				wheelProgress = 0;
+				wheel_progress.resetCount(); // 归位，重新开始
+				new Thread(runnable).start();
+			}
+			break;
 		default:
 			break;
 		}
@@ -86,6 +99,38 @@ public class PieActivity extends BaseActivity implements OnClickListener{
 				}
 			}
 			pieRunning = false;
+		}
+	};
+	
+	final Runnable runnable = new Runnable() {
+
+		@Override
+		public void run() {
+			wheelRunning = true;
+			while (wheelRunning && wheelProgress < 360 * 2 + 1) { // 转两圈
+				if(wheelProgress <= 360){
+					wheel_progress.setText(wheelProgress*100/360+"%");
+				}else{
+					wheel_progress.setText((720-wheelProgress)*100/360+"%");
+				}
+				
+				wheel_progress.incrementProgress();
+				wheelProgress++;
+				try {
+					if(wheelProgress == 360){
+						wheel_progress.setText("100%");
+						Thread.sleep(1000);
+					}else{
+						Thread.sleep(5);
+					}
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			
+			wheelRunning = false;
+			wheel_progress.setText("click");
 		}
 	};
 }

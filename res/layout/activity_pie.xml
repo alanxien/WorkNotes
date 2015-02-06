@@ -39,14 +39,35 @@
         android:gravity="center"
         android:orientation="vertical">
         
-        <com.alan.xie.worknotes.view.pie.PieProgress
-            xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/pie_progress"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            PieProgress:foregroundColor="@color/hotpink"
-            PieProgress:backgroundColor="@color/lightseagreen" />
-        
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            
+            <com.alan.xie.worknotes.view.pie.ProgressWheel
+	            xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
+	            android:id="@+id/wheel_progress"
+	            android:layout_width="150dp"
+	            android:layout_height="150dp"
+	            android:layout_gravity="center_horizontal"
+	            ProgressWheel:barColor="@color/saving_power_rim_color"
+	            ProgressWheel:barWidth="10dp"
+	            ProgressWheel:rimColor="@color/lightseagreen"
+	            ProgressWheel:rimWidth="10dp"
+	            ProgressWheel:spinSpeed="10dp"
+	            ProgressWheel:text="click"
+	            ProgressWheel:textColor="@color/white"
+	            ProgressWheel:textSize="20sp" />
+            
+            <com.alan.xie.worknotes.view.pie.PieProgress
+	            xmlns:PieProgress="http://schemas.android.com/apk/res-auto"
+	            android:id="@+id/pie_progress"
+	            android:layout_width="150dp"
+	            android:layout_height="150dp"
+	            PieProgress:foregroundColor="@color/hotpink"
+	            PieProgress:backgroundColor="@color/lightseagreen" />
+        </LinearLayout>
 	<com.alan.xie.worknotes.view.pie.PieChart
 	    android:id="@+id/pie_chart"
 	    android:layout_width="wrap_content"
