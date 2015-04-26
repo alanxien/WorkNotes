@@ -26,7 +26,7 @@ import com.alan.xie.worknotes.activity.lockscreen.LockScreenActivity;
 public class SliderRelativeLayout extends RelativeLayout{
 	private final static String TAG = "SliderRelativeLayout";
 	
-	private Context context;
+	private Context context; 
 	private Bitmap dragBitmap = null; 			//拖拽图片
 	private ImageView mainView = null; 		
 	private ImageView leftRingView = null;
